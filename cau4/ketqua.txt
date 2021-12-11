@@ -1,0 +1,29 @@
+k get nodes -o wide
+NAME           STATUS   ROLES                  AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+kube-master    Ready    control-plane,master   82m   v1.21.0   10.148.0.29   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7
+kube-worker1   Ready    <none>                 81m   v1.21.0   10.148.0.30   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7
+kube-worker2   Ready    <none>                 81m   v1.21.0   10.148.0.31   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7
+
+asign node master with label "node=master"
+
+```
+kubectl label nodes kube-master node=master
+```
+
+remove the taint from master node
+
+```
+kubectl taint nodes kube-master node-role.kubernetes.io/master-
+```
+
+k get nodes -o wide --show-labels
+NAME           STATUS   ROLES                  AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME   LABELS
+kube-master    Ready    control-plane,master   85m   v1.21.0   10.148.0.29   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=kube-master,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers=,node=master
+kube-worker1   Ready    <none>                 84m   v1.21.0   10.148.0.30   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=kube-worker1,kubernetes.io/os=linux
+kube-worker2   Ready    <none>                 84m   v1.21.0   10.148.0.31   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7    beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=kube-worker2,kubernetes.io/os=linux
+
+k apply -f pod.yml
+
+k get po -o wide
+NAME   READY   STATUS    RESTARTS   AGE   IP          NODE          NOMINATED NODE   READINESS GATES
+web    1/1     Running   0          3m    10.40.0.1   kube-master   <none>           <none>
