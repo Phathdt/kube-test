@@ -3,11 +3,11 @@ kind: Deployment
 metadata:
   name: webapp2
   labels:
-    app: webapp2
+    app: web2
 spec:
   selector:
     matchLabels:
-      app: webapp2
+      app: web2-dep
   replicas: 2
   strategy:
     rollingUpdate:
@@ -17,10 +17,10 @@ spec:
   template:
     metadata:
       labels:
-        app: webapp2
+        app: web2-dep
     spec:
       containers:
-        - name: webapp2
+        - name: web2-dep
           image: nginx:latest
           resources:
             requests:
@@ -31,22 +31,22 @@ spec:
               memory: 100Mi
           ports:
             - containerPort: 80
-              name: webapp2
+              name: web2-dep
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapp2-svc
+  name: web2-svc
 spec:
   selector:
-    app: webapp2
+    app: web2-dep
   type: ClusterIP
   sessionAffinity: None
   sessionAffinityConfig:
     clientIP:
       timeoutSeconds: 10800
   ports:
-    - name: webapp2-svc
+    - name: web2-svc
       protocol: TCP
       port: 80
       targetPort: 80

@@ -10,7 +10,7 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app: webapp2
+              app: web2
       ports:
         - port: 80
 
