@@ -13,7 +13,7 @@ spec:
         [
           '/bin/sh',
           '-ec',
-          'while true; do echo "$(date)" >> /vol/date.log; sleep 1; done',
+          'while true; do echo "$(date)" >> /vol/date.log; sleep 5; done',
         ]
       resources:
         limits:
