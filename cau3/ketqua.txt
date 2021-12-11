@@ -1,0 +1,11 @@
+k get svc
+NAME          TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes    ClusterIP   10.96.0.1     <none>        443/TCP   80m
+webapp2-svc   ClusterIP   10.99.87.95   <none>        80/TCP    15m
+
+
+/ # wget 10.99.87.95:80
+Connecting to 10.99.87.95:80 (10.99.87.95:80)
+saving to 'index.html'
+index.html           100% |*********************************************************************************************************************************************************************************************|   615  0:00:00 ETA
+'index.html' saved
