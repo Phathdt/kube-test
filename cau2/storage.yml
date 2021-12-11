@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fileserver
+  namespace: cau2
+spec:
+  storageClassName: gfs
+  capacity:
+    storage: 1T
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /vol1
+    server: 10.105.16.114
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fileserver-claim
+  namespace: cau2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: 'gfs'
+  resources:
+    requests:
+      storage: 100G
