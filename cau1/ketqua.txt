@@ -7,6 +7,9 @@ kube-worker1   Ready    <none>                 84s    v1.21.0   10.148.0.30   <n
 kube-worker2   Ready    <none>                 79s    v1.21.0   10.148.0.31   <none>        Ubuntu 18.04.5 LTS   5.4.0-1051-gcp   docker://20.10.7
 
 1.2
+k apply -f webapp.yml
+k apply -f webapp-svc.yml
+
 k get deploy
 NAME     READY   UP-TO-DATE   AVAILABLE   AGE
 webapp   2/2     2            2           41s

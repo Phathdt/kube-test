@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: c1
-      image: 'busybox:1.31.1'
+      image: busybox:1.31.1
       command:
         [
           '/bin/sh',
@@ -26,7 +26,7 @@ spec:
         - mountPath: /vol
           name: fileserver-claim
     - name: c2
-      image: 'busybox:1.31.1'
+      image: busybox:1.31.1
       resources:
         limits:
           cpu: 200m
@@ -35,7 +35,7 @@ spec:
           cpu: 100m
           memory: 200Mi
       volumeMounts:
-        - mountPath: /vol/
+        - mountPath: /vol
           name: fileserver-claim
   volumes:
     - name: fileserver-claim
